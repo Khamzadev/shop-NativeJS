@@ -1,10 +1,10 @@
 // Div внутри корзины, в который мы добавляем товары
 const cartWrapper = document.querySelector(".cart-wrapper");
-
+let newProduct = [];
 // Отслеживаем клик на странице
 window.addEventListener("click", function (event) {
   // Проверяем что клик был совершен по кнопке "Добавить в корзину"
-
+  
   if (event.target.hasAttribute("data-cart")) {
     // Находим карточку с товаром, внутри котрой был совершен клик
     const card = event.target.closest(".card");
@@ -19,11 +19,14 @@ window.addEventListener("click", function (event) {
       price: card.querySelector(".price__currency").innerText,
       counter: card.querySelector("[data-counter]").innerText,
     };
-    //Добавление localStorage
 
-    let newProduct = [];
-    newProduct.push(productInfo);
-    localStorage.setItem("cart", JSON.stringify([...JSON.parse(localStorage.getItem("cart")), ...newProduct]));
+    //Добавление localStorage
+    
+    newProduct = [...newProduct, productInfo]
+    localStorage.setItem(
+      "cart",
+      JSON.stringify([...newProduct])
+    );
 
     // Проверять если ли уже такой товар в корзине
     const itemInCart = cartWrapper.querySelector(
@@ -83,3 +86,6 @@ window.addEventListener("click", function (event) {
     calcCartPriceAndDelivery();
   }
 });
+
+
+
