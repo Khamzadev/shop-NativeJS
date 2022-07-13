@@ -23,7 +23,7 @@ window.addEventListener("click", function (event) {
 
     let newProduct = [];
     newProduct.push(productInfo);
-    localStorage.setItem("cart", JSON.stringify(newProduct));
+    localStorage.setItem("cart", JSON.stringify([...JSON.parse(localStorage.getItem("cart")), ...newProduct]));
 
     // Проверять если ли уже такой товар в корзине
     const itemInCart = cartWrapper.querySelector(
